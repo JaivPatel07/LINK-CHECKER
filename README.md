@@ -2,8 +2,6 @@
 
 A fast and modern web-based tool to scan any webpage for broken links and images. LinkScan provides a detailed report, a health score, and filtering options in a clean, responsive interface with both light and dark themes.
 
-![LinkScan Screenshot](https://raw.githubusercontent.com/JaivPatel07/LINK-CHECKER/main/screenshot.png)
-
 ## Features
 
 - **Comprehensive Scanning**: Checks all `<a>` (links) and `<img>` (images) tags on a given URL.
@@ -17,13 +15,13 @@ A fast and modern web-based tool to scan any webpage for broken links and images
 - **Modern Theming**: Includes a sleek, professional UI with a user-selectable light or dark theme that respects system preference.
 - **Responsive Design**: Works great on both desktop and mobile devices.
 
-## 🛠️ Tech Stack
+## Tech Stack
 
 - **Backend**: **Python** with **Flask**, using `requests` for HTTP calls and `BeautifulSoup4` for HTML parsing.
 - **Frontend**: Vanilla **HTML**, **CSS**, and **JavaScript** (no frameworks).
 - **Fonts**: Inter and DM Mono from Google Fonts.
 
-## 🚀 Getting Started
+## Getting Started
 
 Follow these instructions to get a local copy up and running.
 
