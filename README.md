@@ -1,155 +1,86 @@
-# LinkScan - Link and Image Health Checker
+# LinkScan
 
-LinkScan checks a webpage for broken links and broken images.
-It uses a Flask API (`api.py`) and a static frontend (`index.html` + `style.css`).
+A fast and modern web-based tool to scan any webpage for broken links and images. LinkScan provides a detailed report, a health score, and filtering options in a clean, responsive interface with both light and dark themes.
 
-## Current Features
+![LinkScan Screenshot](https://raw.githubusercontent.com/JaivPatel07/LINK-CHECKER/main/screenshot.png)
 
-- Scans `<a href>` links and `<img src>` images from a target URL
-- Concurrent URL checking using `ThreadPoolExecutor`
-- Link summary cards: total, working, broken, health score
-- Image summary cards: total, loading, broken
-- Result tabs: `Links` and `Images`
-- Filters: `All`, `Working`, `Broken`
-- CSV export for active tab results
-- Light/Dark theme toggle (saved in browser `localStorage`)
-- Inline GitHub source icon in footer
-- Responsive UI for desktop and mobile
+## Features
 
-## Project Structure
+- **Comprehensive Scanning**: Checks all `<a>` (links) and `<img>` (images) tags on a given URL.
+- **Detailed Reports**: Shows status codes (e.g., 200, 404), status labels (OK, Broken), and response times for each resource.
+- **Health Score**: Calculates an overall site health percentage based on the number of working links.
+- **Image Auditing**: Provides a separate breakdown for total, working, and broken images.
+- **Interactive UI**:
+    - Separate tabs for Links and Images.
+    - Filter results by status: All, Working, or Broken.
+- **Export to CSV**: Download the list of links or images as a CSV file for further analysis.
+- **Modern Theming**: Includes a sleek, professional UI with a user-selectable light or dark theme that respects system preference.
+- **Responsive Design**: Works great on both desktop and mobile devices.
 
-```text
-LINK-CHECKER/
-  api.py
-  index.html
-  style.css
-  requirements.txt
-  README.md
-```
+## 🛠️ Tech Stack
 
-## Requirements
+- **Backend**: **Python** with **Flask**, using `requests` for HTTP calls and `BeautifulSoup4` for HTML parsing.
+- **Frontend**: Vanilla **HTML**, **CSS**, and **JavaScript** (no frameworks).
+- **Fonts**: Inter and DM Mono from Google Fonts.
 
-- Python 3.10+
+## 🚀 Getting Started
 
-Install dependencies:
+Follow these instructions to get a local copy up and running.
 
-```bash
-pip install -r requirements.txt
-```
+### Prerequisites
 
-`requirements.txt` currently includes:
+- Python 3.x
+- `pip` for package management
 
-- `flask>=3.0`
-- `flask-cors>=4.0`
-- `requests>=2.31`
-- `beautifulsoup4>=4.12`
+### Installation & Setup
 
-## Run Locally
+1.  **Clone the repository:**
+    ```sh
+    git clone https://github.com/JaivPatel07/LINK-CHECKER.git
+    cd LINK-CHECKER
+    ```
 
-1. Start backend:
+2.  **Set up the Python backend:**
+    - Create and activate a virtual environment:
+      ```sh
+      # For Windows
+      python -m venv venv
+      .\venv\Scripts\activate
 
-```bash
-python api.py
-```
+      # For macOS/Linux
+      python3 -m venv venv
+      source venv/bin/activate
+      ```
+    - Install the required packages from `requirements.txt`:
+      ```sh
+      pip install -r requirements.txt
+      ```
+      *(If `requirements.txt` does not exist, create it with `Flask`, `Flask-Cors`, `requests`, and `beautifulsoup4`)*
 
-2. Open frontend:
+### Running the Application
 
-- Open `index.html` in a browser.
-- The frontend calls API at `http://localhost:5000/check`.
+1.  **Start the Flask API:**
+    Run the `api.py` file to start the backend server. It will run on `http://localhost:5000`.
+    ```sh
+    python api.py
+    ```
 
-## UI Walkthrough (Screenshots/GIF)
+2.  **Launch the Frontend:**
+    Open the `index.html` file directly in your web browser.
 
-### 1. Scan
+3.  **Scan a URL:**
+    Enter a URL in the input field (e.g., `google.com`) and click "Scan".
 
-1. Enter a URL in the input field (for example, `https://python.org`).
-2. Click `Scan`.
-3. Wait for results to load in stats cards and list.
+## API Endpoint
 
-Screenshot/GIF placeholder:
+The application uses a single API endpoint to perform the scan.
 
-```text
-docs/media/scan.gif
-```
-
-### 2. Switch Theme
-
-1. Click the top-right theme toggle button (`Light` or `Dark`).
-2. Confirm colors update across cards, toolbar, and results.
-3. Refresh page to verify theme preference is remembered.
-
-Screenshot/GIF placeholder:
-
-```text
-docs/media/switch-theme.gif
-```
-
-### 3. Export CSV
-
-1. Run a scan first.
-2. Choose tab: `Links` or `Images`.
-3. Click `Export CSV`.
-4. Confirm file downloads as `linkscan-<tab>-YYYY-MM-DD.csv`.
-
-Screenshot/GIF placeholder:
-
-```text
-docs/media/export-csv.gif
-```
-
-Tip: Replace the placeholder paths with actual screenshot or GIF files after you add them.
-
-## API
-
-### `GET /`
-
-Health/status endpoint.
-
-### `POST /check`
-
-Request body:
-
-```json
-{ "url": "https://example.com" }
-```
-
-Response shape:
-
-```json
-{
-  "total": 0,
-  "working": 0,
-  "broken": 0,
-  "health": 0,
-  "links": [],
-  "image_stats": {
-    "total": 0,
-    "working": 0,
-    "broken": 0
-  },
-  "images": []
-}
-```
-
-Each link/image result contains:
-
-- `url`
-- `status` (HTTP code or error text)
-- `label`
-- `ok` (boolean)
-- `time_ms`
-
-## Backend Rules and Limits
-
-- Rejects invalid URLs
-- Blocks private/internal/loopback/reserved/link-local targets
-- Max scan size:
-  - `MAX_LINKS = 150`
-  - `MAX_IMAGES = 150`
-- Parallel workers:
-  - `MAX_WORKERS = 15`
-
-## Notes
-
-- For some servers, `HEAD` can fail (`405`/`403`), so API falls back to `GET`.
-- Results are sorted with broken items first for faster troubleshooting.
-- If no links/images are found, API returns an error message.
+- **URL**: `http://localhost:5000/check`
+- **Method**: `POST`
+- **Content-Type**: `application/json`
+- **Request Body**:
+  ```json
+  {
+    "url": "https://example.com"
+  }
+  ```
