@@ -26,12 +26,12 @@ body {
         radial-gradient(1000px 450px at 12% -10%, rgba(79, 141, 255, 0.2), transparent 62%),
         radial-gradient(850px 420px at 90% 0%, rgba(34, 197, 94, 0.08), transparent 58%),
         linear-gradient(125deg, #05070e 0%, var(--bg) 45%, #0a1220 100%);
-    background-size: 100% 100%, 100% 100%, 200% 200%;
+    background-size: 100% 100%, 100% 100%, 100% 100%;
     color: var(--text);
     min-height: 100vh;
     padding: 48px 20px 40px;
     -webkit-font-smoothing: antialiased;
-    animation: moveGradient 24s ease infinite;
+    animation: none;
 }
 
 .container {
@@ -41,7 +41,6 @@ body {
     border: 1px solid rgba(149, 171, 211, 0.14);
     border-radius: 18px;
     padding: 28px 22px 18px;
-    backdrop-filter: blur(8px);
     box-shadow: var(--shadow-soft);
     transition: transform 0.4s ease-in-out;
 }
@@ -123,7 +122,7 @@ h1 span {
     letter-spacing: 0.06em;
     text-transform: uppercase;
     cursor: pointer;
-    transition: all 0.2s ease;
+    transition: transform 0.2s ease, box-shadow 0.2s ease, background 0.2s ease;
     white-space: nowrap;
 }
 
@@ -251,7 +250,7 @@ h1 span {
     height: 100%;
     border-radius: 99px;
     width: 0%;
-    transition: width 0.8s cubic-bezier(0.22, 1, 0.36, 1);
+    transition: width 0.4s ease;
 }
 
 /* Image Stats */
@@ -284,7 +283,7 @@ h1 span {
     font-size: 12px;
     font-weight: 600;
     cursor: pointer;
-    transition: all 0.15s;
+    transition: background-color 0.15s ease, color 0.15s ease, border-color 0.15s ease;
 }
 
 .tab-btn.active {
@@ -310,7 +309,7 @@ h1 span {
     font-size: 11px;
     font-weight: 600;
     cursor: pointer;
-    transition: all 0.15s;
+    transition: background-color 0.15s ease, color 0.15s ease, border-color 0.15s ease;
     letter-spacing: 0.04em;
 }
 
@@ -326,21 +325,31 @@ h1 span {
 
 .csv-btn {
     margin-left: auto;
-    background: none;
-    border: 1px solid var(--green);
-    color: var(--green);
-    padding: 5px 14px;
+    background: linear-gradient(145deg, rgba(34, 197, 94, 0.2), rgba(34, 197, 94, 0.08));
+    border: 1px solid rgba(34, 197, 94, 0.7);
+    color: #b6f7cf;
+    padding: 6px 14px;
     border-radius: var(--radius);
     font-family: var(--sans);
     font-size: 11px;
     font-weight: 700;
+    letter-spacing: 0.03em;
     cursor: pointer;
-    transition: all 0.15s;
+    box-shadow: 0 8px 16px -12px rgba(34, 197, 94, 0.6);
+    transition: transform 0.15s ease, background-color 0.15s ease, color 0.15s ease, border-color 0.15s ease, box-shadow 0.15s ease;
 }
 
 .csv-btn:hover {
     background: var(--green);
     color: #07150d;
+    border-color: var(--green);
+    transform: translateY(-1px);
+    box-shadow: 0 10px 18px -10px rgba(34, 197, 94, 0.75);
+}
+
+.csv-btn:active {
+    transform: translateY(0);
+    box-shadow: none;
 }
 
 /* Results */
@@ -526,6 +535,13 @@ body.light-theme .csv-btn:hover {
     color: #fff; /* Keep text white on green hover */
 }
 
+body.light-theme .csv-btn {
+    background: linear-gradient(145deg, rgba(22, 163, 74, 0.14), rgba(22, 163, 74, 0.05));
+    border-color: rgba(22, 163, 74, 0.45);
+    color: #166534;
+    box-shadow: 0 8px 14px -12px rgba(22, 163, 74, 0.5);
+}
+
 body.light-theme #resultsList {
     background: linear-gradient(180deg, #ffffff, #f8fafc);
     box-shadow: 0 4px 6px -1px rgba(0, 0, 0, 0.05), 0 2px 4px -2px rgba(0, 0, 0, 0.05);
@@ -572,7 +588,7 @@ body.light-theme .alert {
     align-items: center;
     justify-content: center;
     cursor: pointer;
-    transition: all 0.2s ease;
+    transition: border-color 0.2s ease, color 0.2s ease, background-color 0.2s ease;
     font-size: 12px;
     font-weight: 700;
     letter-spacing: 0.03em;
