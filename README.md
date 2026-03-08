@@ -1,108 +1,155 @@
-# 🔗 LinkScan — Link & Image Health Checker
+# LinkScan - Link and Image Health Checker
 
-A web-based tool that audits **broken links** and **missing images** on any webpage. Built with a Python/Flask backend and a modern dark-themed frontend.
+LinkScan checks a webpage for broken links and broken images.
+It uses a Flask API (`api.py`) and a static frontend (`index.html` + `style.css`).
 
-## Features
+## Current Features
 
-- Scans all `<a>` links and `<img>` sources on a page
-- Concurrent checking with a thread pool for speed
-- Health score, working/broken stats for both links and images
-- Filter results by status (All / Working / Broken)
-- Export results to CSV
-- Responsive dark UI with smooth animations
+- Scans `<a href>` links and `<img src>` images from a target URL
+- Concurrent URL checking using `ThreadPoolExecutor`
+- Link summary cards: total, working, broken, health score
+- Image summary cards: total, loading, broken
+- Result tabs: `Links` and `Images`
+- Filters: `All`, `Working`, `Broken`
+- CSV export for active tab results
+- Light/Dark theme toggle (saved in browser `localStorage`)
+- Inline GitHub source icon in footer
+- Responsive UI for desktop and mobile
 
 ## Project Structure
 
-```
+```text
 LINK-CHECKER/
-├── api.py            ← Flask backend (link & image checking API)
-├── index.html        ← Frontend (open in browser after starting Flask)
-├── requirements.txt  ← Python dependencies
-├── .gitignore
-└── README.md
+  api.py
+  index.html
+  style.css
+  requirements.txt
+  README.md
 ```
 
-## How It Works
+## Requirements
 
-```
-Browser (index.html)
-      │
-      │  POST /check  { "url": "https://example.com" }
-      ▼
-Flask (api.py) on localhost:5000
-      │
-      ├── Fetches the target page
-      ├── Extracts all <a> links and <img> sources
-      ├── Checks each URL's HTTP status (concurrent)
-      │
-      └── Returns JSON { total, working, broken, health, links[], image_stats, images[] }
-      │
-      ▼
-Browser renders results with stats, filters & CSV export
-```
+- Python 3.10+
 
-## Setup & Run
+Install dependencies:
 
-### 1. Install dependencies
 ```bash
 pip install -r requirements.txt
 ```
 
-### 2. Start the Flask backend
+`requirements.txt` currently includes:
+
+- `flask>=3.0`
+- `flask-cors>=4.0`
+- `requests>=2.31`
+- `beautifulsoup4>=4.12`
+
+## Run Locally
+
+1. Start backend:
+
 ```bash
 python api.py
 ```
-You'll see:
+
+2. Open frontend:
+
+- Open `index.html` in a browser.
+- The frontend calls API at `http://localhost:5000/check`.
+
+## UI Walkthrough (Screenshots/GIF)
+
+### 1. Scan
+
+1. Enter a URL in the input field (for example, `https://python.org`).
+2. Click `Scan`.
+3. Wait for results to load in stats cards and list.
+
+Screenshot/GIF placeholder:
+
+```text
+docs/media/scan.gif
 ```
-╔══════════════════════════════════════╗
-║   🔗 Link Checker API — Running!    ║
-║   http://localhost:5000              ║
-╚══════════════════════════════════════╝
+
+### 2. Switch Theme
+
+1. Click the top-right theme toggle button (`Light` or `Dark`).
+2. Confirm colors update across cards, toolbar, and results.
+3. Refresh page to verify theme preference is remembered.
+
+Screenshot/GIF placeholder:
+
+```text
+docs/media/switch-theme.gif
 ```
 
-### 3. Open the frontend
-Open `index.html` in your browser (double-click it or use Live Server).
+### 3. Export CSV
 
-### 4. Use it
-- Enter any URL (e.g. `https://python.org`)
-- Click **Scan →**
-- View link and image stats, filter by Working/Broken, switch between Links & Images tabs
-- Export results as CSV
+1. Run a scan first.
+2. Choose tab: `Links` or `Images`.
+3. Click `Export CSV`.
+4. Confirm file downloads as `linkscan-<tab>-YYYY-MM-DD.csv`.
 
-## API Reference
+Screenshot/GIF placeholder:
+
+```text
+docs/media/export-csv.gif
+```
+
+Tip: Replace the placeholder paths with actual screenshot or GIF files after you add them.
+
+## API
 
 ### `GET /`
-Returns a status message confirming the API is running.
+
+Health/status endpoint.
 
 ### `POST /check`
-**Request body:**
+
+Request body:
+
 ```json
 { "url": "https://example.com" }
 ```
-**Response:**
+
+Response shape:
+
 ```json
 {
-  "total": 42,
-  "working": 39,
-  "broken": 3,
-  "health": 93,
-  "links": [
-    { "url": "https://example.com/page", "status": 200, "label": "OK", "ok": true, "time_ms": 245 },
-    { "url": "https://example.com/missing", "status": 404, "label": "Not Found", "ok": false, "time_ms": 120 }
-  ],
+  "total": 0,
+  "working": 0,
+  "broken": 0,
+  "health": 0,
+  "links": [],
   "image_stats": {
-    "total": 10,
-    "working": 9,
-    "broken": 1
+    "total": 0,
+    "working": 0,
+    "broken": 0
   },
-  "images": [
-    { "url": "https://example.com/logo.png", "status": 200, "label": "OK", "ok": true, "time_ms": 80 }
-  ]
+  "images": []
 }
 ```
 
-## Tech Stack
+Each link/image result contains:
 
-- **Backend:** Python, Flask, requests, BeautifulSoup4
-- **Frontend:** Vanilla HTML/CSS/JS
-- **Fonts:** Syne, DM Mono (Google Fonts)
+- `url`
+- `status` (HTTP code or error text)
+- `label`
+- `ok` (boolean)
+- `time_ms`
+
+## Backend Rules and Limits
+
+- Rejects invalid URLs
+- Blocks private/internal/loopback/reserved/link-local targets
+- Max scan size:
+  - `MAX_LINKS = 150`
+  - `MAX_IMAGES = 150`
+- Parallel workers:
+  - `MAX_WORKERS = 15`
+
+## Notes
+
+- For some servers, `HEAD` can fail (`405`/`403`), so API falls back to `GET`.
+- Results are sorted with broken items first for faster troubleshooting.
+- If no links/images are found, API returns an error message.
