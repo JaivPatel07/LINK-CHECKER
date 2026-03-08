@@ -10,6 +10,8 @@
 </head>
 <body>
 
+<button class="theme-toggle" id="themeToggle" type="button" aria-label="Switch to light theme" title="Switch to light theme">Light</button>
+
 <div class="container">
 
     <header>
@@ -98,6 +100,33 @@
     const $ = id => document.getElementById(id);
     let allLinks = [], allImages = [];
     let activeTab = 'links', activeFilter = 'all';
+
+    const THEME_KEY = 'linkscan-theme';
+
+    function applyTheme(theme) {
+        const isLight = theme === 'light';
+        document.body.classList.toggle('light-theme', isLight);
+        const toggle = $('themeToggle');
+        toggle.textContent = isLight ? 'Dark' : 'Light';
+        toggle.setAttribute('aria-label', isLight ? 'Switch to dark theme' : 'Switch to light theme');
+        toggle.setAttribute('title', isLight ? 'Switch to dark theme' : 'Switch to light theme');
+    }
+
+    function initTheme() {
+        const saved = localStorage.getItem(THEME_KEY);
+        if (saved === 'light' || saved === 'dark') {
+            applyTheme(saved);
+            return;
+        }
+        const prefersLight = window.matchMedia && window.matchMedia('(prefers-color-scheme: light)').matches;
+        applyTheme(prefersLight ? 'light' : 'dark');
+    }
+
+    function toggleTheme() {
+        const nextTheme = document.body.classList.contains('light-theme') ? 'dark' : 'light';
+        applyTheme(nextTheme);
+        localStorage.setItem(THEME_KEY, nextTheme);
+    }
 
     function escapeHtml(s) {
         return String(s).replace(/&/g,'&amp;').replace(/</g,'&lt;').replace(/>/g,'&gt;').replace(/"/g,'&quot;');
@@ -227,6 +256,7 @@
     $('scanBtn').addEventListener('click', scan);
     $('urlInput').addEventListener('keydown', e => { if (e.key === 'Enter') scan(); });
     $('csvBtn').addEventListener('click', exportCSV);
+    $('themeToggle').addEventListener('click', toggleTheme);
 
     document.querySelectorAll('.tab-btn').forEach(btn => {
         btn.addEventListener('click', () => {
@@ -245,6 +275,8 @@
             renderList(activeTab === 'links' ? allLinks : allImages);
         });
     });
+
+    initTheme();
 </script>
 </body>
 </html>
