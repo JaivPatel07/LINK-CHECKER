@@ -4,15 +4,13 @@ A fast and modern web-based tool to scan any webpage for broken links and images
 
 ## Screenshots
 
-<p align="center">
-  <img alt="LinkScan Home - Dark Theme" src="dark.png" width="49%">
-  &nbsp;
-  <img alt="LinkScan Results - Dark Theme" src="1.png" width="49%">
-  <br>
-  <img alt="LinkScan Home - Light Theme" src="Light.png" width="49%">
-  &nbsp;
-  <img alt="LinkScan Results - Light Theme" src="2.png" width="49%">
-</p>
+| Dark Home | Dark Results |
+|---|---|
+| <img alt="LinkScan Home - Dark Theme" src="dark.png" width="100%"> | <img alt="LinkScan Results - Dark Theme" src="1.png" width="100%"> |
+
+| Light Home | Light Results |
+|---|---|
+| <img alt="LinkScan Home - Light Theme" src="Light.png" width="100%"> | <img alt="LinkScan Results - Light Theme" src="2.png" width="100%"> |
 
 ## Features
 
