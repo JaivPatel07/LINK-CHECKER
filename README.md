@@ -6,11 +6,15 @@ A fast and modern web-based tool to scan any webpage for broken links and images
 
 | Dark Home | Dark Results |
 |---|---|
-| <img alt="Web Anyliser Home - Dark Theme" src="dark.png" width="100%"> | <img alt="Web Anyliser Results - Dark Theme" src="1.png" width="100%"> |
+| <img alt="Web Anyliser Home - Dark Theme" src="Dark.png" width="100%"> | <img alt="Web Anyliser Full Results" src="ALL.png" width="100%"> |
 
-| Light Home | Light Results |
+| Light Home | Working Links |
 |---|---|
-| <img alt="Web Anyliser Home - Light Theme" src="Light.png" width="100%"> | <img alt="Web Anyliser Results - Light Theme" src="2.png" width="100%"> |
+| <img alt="Web Anyliser Home - Light Theme" src="Light.png" width="100%"> | <img alt="Web Anyliser Working Links" src="Working Links.png" width="100%"> |
+
+| Not Working Links | Working Images |
+|---|---|
+| <img alt="Web Anyliser Not Working Links" src="Not working Links.png" width="100%"> | <img alt="Web Anyliser Working Images" src="Working images.png" width="100%"> |
 
 ## Features
 
