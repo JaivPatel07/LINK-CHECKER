@@ -3,7 +3,7 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>LinkScan</title>
+    <title>Web Anyliser</title>
     <link rel="preconnect" href="https://fonts.googleapis.com">
     <link href="https://fonts.googleapis.com/css2?family=DM+Mono:wght@400;500&family=Inter:wght@400;600;700;800&display=swap" rel="stylesheet">
     <link rel="stylesheet" href="style.css">
@@ -15,7 +15,7 @@
 <div class="container">
 
     <header>
-        <div class="brand">LinkScan</div>
+        <div class="brand">Web Anyliser</div>
         <h1>Check every <span>link &amp; image</span></h1>
         <p class="subtitle">Audit broken links and missing images on any webpage.</p>
     </header>
@@ -108,7 +108,7 @@
     let allLinks = [], allImages = [];
     let activeTab = 'links', activeFilter = 'all';
 
-    const THEME_KEY = 'linkscan-theme';
+    const THEME_KEY = 'web-anyliser-theme';
 
     function applyTheme(theme) {
         const isLight = theme === 'light';
@@ -255,7 +255,7 @@
         const blob = new Blob([rows.join('\n')], { type: 'text/csv' });
         const a = document.createElement('a');
         a.href = URL.createObjectURL(blob);
-        a.download = `linkscan-${activeTab}-${new Date().toISOString().slice(0,10)}.csv`;
+        a.download = `web-anyliser-${activeTab}-${new Date().toISOString().slice(0,10)}.csv`;
         a.click();
         URL.revokeObjectURL(a.href);
     }

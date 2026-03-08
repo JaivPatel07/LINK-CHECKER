@@ -1,16 +1,16 @@
-# LinkScan
+# Web Anyliser
 
-A fast and modern web-based tool to scan any webpage for broken links and images. LinkScan provides a detailed report, a health score, and filtering options in a clean, responsive interface with both light and dark themes.
+A fast and modern web-based tool to scan any webpage for broken links and images. Web Anyliser provides a detailed report, a health score, and filtering options in a clean, responsive interface with both light and dark themes.
 
 ## Screenshots
 
 | Dark Home | Dark Results |
 |---|---|
-| <img alt="LinkScan Home - Dark Theme" src="dark.png" width="100%"> | <img alt="LinkScan Results - Dark Theme" src="1.png" width="100%"> |
+| <img alt="Web Anyliser Home - Dark Theme" src="dark.png" width="100%"> | <img alt="Web Anyliser Results - Dark Theme" src="1.png" width="100%"> |
 
 | Light Home | Light Results |
 |---|---|
-| <img alt="LinkScan Home - Light Theme" src="Light.png" width="100%"> | <img alt="LinkScan Results - Light Theme" src="2.png" width="100%"> |
+| <img alt="Web Anyliser Home - Light Theme" src="Light.png" width="100%"> | <img alt="Web Anyliser Results - Light Theme" src="2.png" width="100%"> |
 
 ## Features
 
