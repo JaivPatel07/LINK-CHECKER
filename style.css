@@ -436,6 +436,12 @@ footer a {
     text-decoration: none;
 }
 
+.source-link {
+    display: inline-flex;
+    align-items: center;
+    gap: 6px;
+}
+
 footer a:hover { text-decoration: underline; }
 
 /* Animations */
