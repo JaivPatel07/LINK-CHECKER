@@ -2,7 +2,18 @@
 
 A fast and modern web-based tool to scan any webpage for broken links and images. LinkScan provides a detailed report, a health score, and filtering options in a clean, responsive interface with both light and dark themes.
 
-![alt text](dark.png) ![alt text](1.png) ![alt text](Light.png) ![alt text](2.png)
+## Screenshots
+
+<p align="center">
+  <img alt="LinkScan Home - Dark Theme" src="dark.png" width="49%">
+  &nbsp;
+  <img alt="LinkScan Results - Dark Theme" src="1.png" width="49%">
+  <br>
+  <img alt="LinkScan Home - Light Theme" src="Light.png" width="49%">
+  &nbsp;
+  <img alt="LinkScan Results - Light Theme" src="2.png" width="49%">
+</p>
+
 ## Features
 
 - **Comprehensive Scanning**: Checks all `<a>` (links) and `<img>` (images) tags on a given URL.
