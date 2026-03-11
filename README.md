@@ -96,3 +96,4 @@ The application uses a single API endpoint to perform the scan.
     "url": "https://example.com"
   }
   ```
+  Thank you
